@@ -1,9 +1,8 @@
 package main
 
 import (
-	"example.com/m/controllers"
 	"example.com/m/initializers"
-	"github.com/gin-gonic/gin"
+	"example.com/m/routes"
 )
 
 func init(){
@@ -12,9 +11,7 @@ func init(){
 }
 
 func main() { 
-	r := gin.Default()
-	r.POST("/posts",controllers.PostsCreate)
-	r.GET("/posts",controllers.GetPosts)
-
-	r.Run() // listen and serve on 0.0.0.0:8080
+	// r := gin.Default()
+	route:= routes.AddRoute()
+	route.Run() // listen and serve on 0.0.0.0:8080
 }
