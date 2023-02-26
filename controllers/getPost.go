@@ -13,3 +13,13 @@ func GetPosts(c *gin.Context) {
 			"data":data ,
 		})
 	}
+
+func GetPostById(c *gin.Context){
+	id := c.Param("id")
+		var data models.Post
+		initializers.DB.First(&data,id)
+		c.JSON(200, gin.H{
+			"data":data ,
+		})
+
+	}
