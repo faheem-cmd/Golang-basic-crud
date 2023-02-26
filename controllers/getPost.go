@@ -19,7 +19,7 @@ func GetPosts(c *gin.Context) {
 func GetPostById(c *gin.Context){
 	id := c.Param("id")
 		var data models.Post
-		initializers.DB.Find(&data,id)
+		initializers.DB.First(&data,id)
 		fmt.Println(data.ID,"hei")
 		if data.ID != 0{
         c.JSON(200, gin.H{
