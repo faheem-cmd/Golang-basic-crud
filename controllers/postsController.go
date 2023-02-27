@@ -29,6 +29,42 @@ func PostsCreate(c *gin.Context) {
 		})
 	}
 
+
+	func UpdatePost(c *gin.Context){
+		id:=c.Param("id")
+		var body struct{
+			Body string
+			Title string
+		}
+		c.Bind(&body)
+		//find posts data
+		var data models.Post
+		initializers.DB.First(&data,id)
+
+		//update data
+		initializers.DB.Model(&data).Updates(models.Post{
+			Title: body.Title,
+			Body: body.Body,
+		})
+		c.JSON(200,gin.H{
+			"status":200,
+			"data":data,
+
+		})
+
+	}
+
+
+	func DeletePost(c *gin.Context){
+		id:=c.Param("id")
+		initializers.DB.Delete(&models.Post{},id)
+		c.Status(200)
+		c.JSON(200,gin.H{
+			"message":"Deleted",
+	
+
+		})
+	}
 	 
 
 	

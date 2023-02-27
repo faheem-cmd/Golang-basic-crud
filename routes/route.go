@@ -10,5 +10,7 @@ func AddRoute()*gin.Engine {
 	route.POST("/posts",controllers.PostsCreate)
 	route.GET("/posts",controllers.GetPosts)
 	route.GET("/posts/:id",controllers.GetPostById)
+	route.PUT("/posts/:id",controllers.UpdatePost)
+	route.DELETE("/posts/:id",controllers.DeletePost)
 	return route
 }
