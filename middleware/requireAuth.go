@@ -1,15 +1,14 @@
-package routes
+package middleware
 
 import (
 	"net/http"
 	"strings"
 
-	"example.com/m/controllers"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v4"
 )
 
-func requireAuth() gin.HandlerFunc {
+func requireAuth(c*gin.Context) gin.HandlerFunc {
     return func(c *gin.Context) {
         header := c.Request.Header.Get("Authorization")
         if header == "" {
@@ -40,30 +39,4 @@ func requireAuth() gin.HandlerFunc {
 
         c.Next()
     }
-}
-
-
-
-
-
-func AddRoute()*gin.Engine {
-	route := gin.Default()
-	authenticated := route.Group("/")
-    authenticated.Use(requireAuth())
-	route.POST("/posts",controllers.PostsCreate)
-	route.GET("/posts",controllers.GetPosts)
-	route.GET("/posts/:id",controllers.GetPostById)
-	route.PUT("/posts/:id",controllers.UpdatePost)
-	route.DELETE("/posts/:id",controllers.DeletePost)
-	route.POST("/signup/",controllers.SignUp)
-	route.POST("/login/",controllers.Login)
-	authenticated.GET("/validate",controllers.Valid)
-
-
-
-
-
-
-
-	return route
 }
