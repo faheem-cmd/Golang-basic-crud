@@ -107,5 +107,7 @@ func Login(c *gin.Context) {
 
 func Valid(c *gin.Context) {
 	 userID := c.MustGet("userID")
-		 c.JSON(http.StatusOK, gin.H{"userID": userID})
+	 var data models.User
+	 initializers.DB.Find(&data,userID)
+		 c.JSON(http.StatusOK, gin.H{"userID": data})
 }
