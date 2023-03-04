@@ -39,7 +39,7 @@ func SignUp(c *gin.Context) {
 
 	 if result.Error != nil{
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error":"failed to create",
+			"error":"failed to create user",
 		})
 		return
 	 }
