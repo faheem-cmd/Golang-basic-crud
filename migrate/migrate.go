@@ -12,6 +12,6 @@ initializers.ConnectToDB()
 
 func main(){
 		 // Migrate the schema
-initializers.DB.AutoMigrate(&models.Post{})
+initializers.DB.AutoMigrate(&models.Post{},&models.User{})
 	
 }
