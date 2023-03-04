@@ -8,7 +8,7 @@ import (
 	"github.com/golang-jwt/jwt/v4"
 )
 
-func requireAuth(c*gin.Context) gin.HandlerFunc {
+func RequireAuth() gin.HandlerFunc {
     return func(c *gin.Context) {
         header := c.Request.Header.Get("Authorization")
         if header == "" {

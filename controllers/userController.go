@@ -39,7 +39,7 @@ func SignUp(c *gin.Context) {
 
 	 if result.Error != nil{
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error":"failed to create",
+			"error":"failed to create user",
 		})
 		return
 	 }
@@ -107,5 +107,7 @@ func Login(c *gin.Context) {
 
 func Valid(c *gin.Context) {
 	 userID := c.MustGet("userID")
-		 c.JSON(http.StatusOK, gin.H{"userID": userID})
+	 var data models.User
+	 initializers.DB.Find(&data,userID)
+		 c.JSON(http.StatusOK, gin.H{"userID": data})
 }
