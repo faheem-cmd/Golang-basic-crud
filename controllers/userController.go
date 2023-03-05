@@ -46,7 +46,9 @@ func SignUp(c *gin.Context) {
 
 	//Respond
 	c.JSON(http.StatusOK, gin.H{
-		"data":user.Email,
+		"status":201,
+		"data":"User creates successfully",
+
 	})
 }
 
@@ -88,6 +90,15 @@ func Login(c *gin.Context) {
 	})
 
 	tokenString ,err:= token.SignedString([]byte(os.Getenv("SECRET")))
+	num:= "1233"
+	tokendata := map[string]string{"access_token": tokenString,"number":num }
+	  details := []gin.H{
+            {"name": "joe", "age": 28},
+            {"name": "philip", "age": 18},
+        }
+		  metaData := []string{"1", "faheem", "hello"}
+		  number := []int{1,2,3,4}
+
 
 	if err != nil{
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -98,9 +109,13 @@ func Login(c *gin.Context) {
 
 	c.SetSameSite(http.SameSiteLaxMode)
 	c.SetCookie(" ",tokenString,3600 * 24 * 30,"","",false,true )
-
+	
 	c.JSON(http.StatusOK, gin.H{
-		"token":tokenString,
+		"status":200,
+		"token":tokendata,
+		"data":details,
+		"meta":metaData,
+		"number":number,
 	})
 
 }
